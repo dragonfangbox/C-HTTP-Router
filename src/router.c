@@ -12,6 +12,10 @@ router_t* router_create() {
 	return r;
 }
 
+void router_setDefaultHandler(router_t* r, void (*handler)(request_t* req, response_t* res)) {
+	r->defaultHandler = handler;
+}
+
 void router_destroy(router_t* r) {
 	for (int i = 0; i < r->routes.size; i++) {
 		route_t route = r->routes.data[i];
@@ -67,6 +71,4 @@ void router_printRoutes(router_t* r) {
 
 		printf("METHOD: %s, PATH: %s\n", route.method, route.path);
 	}
-
-	printf("--------------\n");
 }

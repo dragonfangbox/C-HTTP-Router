@@ -23,6 +23,9 @@ A simple, lightweight router in C.
         // initalize a new router
         router_t* router = router_create();
 
+        // set the default handler
+	    router_setDefaultHandler(router, defaultHandler);
+
         // create a new route
         router_addRoute(router, "GET", "/", root);
 

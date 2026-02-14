@@ -27,6 +27,7 @@ typedef struct {
 } router_t;
 
 router_t* router_create();
+void router_setDefaultHandler(router_t* r, void (*handler)(request_t* req, response_t* res));
 void router_destroy(router_t* r);
 
 void router_addRoute(router_t* r, 
