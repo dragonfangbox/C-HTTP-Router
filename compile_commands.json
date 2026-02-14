@@ -1,0 +1,30 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Isrc",
+      "-o",
+      "main",
+      "src/main.c"
+    ],
+    "directory": "/home/josiah/projects/http-router",
+    "file": "/home/josiah/projects/http-router/src/main.c",
+    "output": "/home/josiah/projects/http-router/main"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Isrc",
+      "-o",
+      "main",
+      "src/router.c"
+    ],
+    "directory": "/home/josiah/projects/http-router",
+    "file": "/home/josiah/projects/http-router/src/router.c",
+    "output": "/home/josiah/projects/http-router/main"
+  }
+]
