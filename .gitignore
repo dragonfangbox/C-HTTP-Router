@@ -1,0 +1,4 @@
+*.o
+*.out
+
+compile-commands.json

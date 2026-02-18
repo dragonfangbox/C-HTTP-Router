@@ -10,4 +10,4 @@ build:
 	$(CC) $(CFLAGS) -o main $(CFILES) $(INCLUDES)
 
 debug:
-	$(CC) $(CLFAGS) -fsanitize=address -O0 -g -o main $(CFILES) $(INCLUDES)
+	$(CC) $(CLFAGS) -fsanitize=address -O0 -g -o main.out $(CFILES) $(INCLUDES)
