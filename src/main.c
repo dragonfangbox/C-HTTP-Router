@@ -19,13 +19,14 @@ int main() {
 	router_t* router = router_create();
 	router_setDefaultHandler(router, defaultHandler);
 
-	router_addRoute(router, "GET", "/", root);
+	router_addRoute(router, GET, "/", root);
 
 	router_printRoutes(router);
+	router_printMethods();
 
 	response_t res;
+	request_t req = {GET, "/"}; 
 
-	request_t req = {"GET", "/"}; 
 	if(router_handleRoute(router, &req, &res) != 0) {
 		printf("--- Route not found! ---\n");
 		printf("%s\n", res.body);
@@ -34,13 +35,13 @@ int main() {
 		printf("%s\n", res.body);
 	}
 
-	req.method = "GeahfT";
+	req.method = 127;
 	if(router_handleRoute(router, &req, &res) != 0) {
 		printf("--- Route not found! ---\n");
-		printf("%s\n", res.body);
+		printf("Body: %s\n", res.body);
 	} else {
 		printf("--- Route found! ---\n");
-		printf("%s\n", res.body);
+		printf("Body: %s\n", res.body);
 	}
 	router_destroy(router);
 

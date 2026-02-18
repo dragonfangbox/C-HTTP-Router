@@ -3,8 +3,15 @@
 
 #include "dynarr.h"
 
+typedef enum {
+	GET,
+	POST,
+	PUT,
+	DELETE,
+} methodType_e;
+
 typedef struct {
-	const char* method;
+	int method;
 	const char* path;
 } request_t;
 
@@ -14,7 +21,7 @@ typedef struct {
 } response_t;
 
 typedef struct {
-	char* method;
+	int method;
 	char* path;
 	void (*handler)(request_t* req, response_t* res);
 } route_t;
@@ -31,14 +38,15 @@ void router_setDefaultHandler(router_t* r, void (*handler)(request_t* req, respo
 void router_destroy(router_t* r);
 
 void router_addRoute(router_t* r, 
-					 const char* method, 
+					 const int method, 
 					 const char* path,
 				 	 void (*handler)(request_t* req, response_t* res));
 
 int router_handleRoute(router_t* r, 
-						request_t* req,
-						response_t* res);
+					   request_t* req,
+					   response_t* res);
 
 void router_printRoutes(router_t* r);
+void router_printMethods();
 
 #endif

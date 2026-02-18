@@ -3,6 +3,8 @@
 
 #include "router.h"
 
+// url params work like this: https://website.com?helloworld=12345&yourmom=hi
+//												 ^ params start	  ^end of param
 router_t* router_create() {
 	router_t* r = malloc(sizeof(router_t));
 	
@@ -20,7 +22,6 @@ void router_destroy(router_t* r) {
 	for (int i = 0; i < r->routes.size; i++) {
 		route_t route = r->routes.data[i];
 
-		free(route.method);
 		free(route.path);
 	}
 
@@ -31,13 +32,13 @@ void router_destroy(router_t* r) {
 
 
 void router_addRoute(router_t* r, 
-					 const char* method, 
+					 const int method, 
 					 const char* path,
 				 	 void (*handler)(request_t* req, response_t* res))
 {
 	route_t route;
 
-	route.method = strdup(method);
+	route.method = method;
 	route.path = strdup(path);
 	route.handler = handler;
 
@@ -50,7 +51,7 @@ int router_handleRoute(router_t* r,
 {
 	for (int i = 0; i < r->routes.size; i++) {
 		route_t route = r->routes.data[i];
-		if (strcmp(req->method, route.method) == 0 && strcmp(req->path, route.path) == 0) {
+		if (route.method == req->method && strcmp(req->path, route.path) == 0) {
 			route.handler(req, res);
 			return 0;
 		}
@@ -63,12 +64,20 @@ int router_handleRoute(router_t* r,
 	return 404;
 }
 
+void router_printMethods() {
+	printf("--- METHODS ---\n");
+	printf("GET: %d\n", GET);
+	printf("POST: %d\n", POST);
+	printf("PUT: %d\n", PUT);
+	printf("DELETE: %d\n", DELETE);
+}
+
 void router_printRoutes(router_t* r) {
 	printf("--- ROUTES ---\n");
 
 	for (int i = 0; i < r->routes.size; i++) {
 		route_t route = r->routes.data[i];
 
-		printf("METHOD: %s, PATH: %s\n", route.method, route.path);
+		printf("METHOD: %d, PATH: %s\n", route.method, route.path);
 	}
 }

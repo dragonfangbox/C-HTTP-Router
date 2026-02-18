@@ -24,13 +24,16 @@ A simple, lightweight router in C.
         router_t* router = router_create();
 
         // set the default handler
-	    router_setDefaultHandler(router, defaultHandler);
+        router_setDefaultHandler(router, defaultHandler);
 
         // create a new route
-        router_addRoute(router, "GET", "/", root);
+        router_addRoute(router, GET, "/", root);
 
         // print all routes for debugging
         router_printRoutes(router);
+
+        // print all method enum values
+        router_printMethods();
 
         // create a request and a response structure
         request_t req = ...;
