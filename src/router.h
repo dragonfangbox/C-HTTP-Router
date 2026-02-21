@@ -46,6 +46,8 @@ int router_handleRoute(router_t* r,
 					   request_t* req,
 					   response_t* res);
 
+void* router_getQueryParam(const char* path, char* param);
+
 void router_printRoutes(router_t* r);
 void router_printMethods();
 

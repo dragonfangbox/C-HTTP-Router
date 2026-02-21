@@ -27,7 +27,7 @@ A simple, lightweight router in C.
         router_setDefaultHandler(router, defaultHandler);
 
         // create a new route
-        router_addRoute(router, GET, "/", root);
+        router_addRoute(router, GET, "/foo?bar=123", root);
 
         // print all routes for debugging
         router_printRoutes(router);
@@ -46,6 +46,9 @@ A simple, lightweight router in C.
             printf("--- Route found! ---\n");
         }
 
+        // get a query paramter
+        void* value = router_getQueryParam(req.path, "bar");
+
         // free the router
         router_destroy(router);
 
@@ -55,5 +58,4 @@ A simple, lightweight router in C.
 
 ### TODO
 
-* Add url params to path
-
+* Query param function currently doesn't detect the type of the parameter and only returns it as a string

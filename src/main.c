@@ -25,14 +25,14 @@ int main() {
 	router_printMethods();
 
 	response_t res;
-	request_t req = {GET, "/"}; 
+	request_t req = {GET, "yourmother/hi&what=yourmother?hello=192"}; 
 
 	if(router_handleRoute(router, &req, &res) != 0) {
 		printf("--- Route not found! ---\n");
-		printf("%s\n", res.body);
+		printf("Body: %s\n", res.body);
 	} else {
 		printf("--- Route found! ---\n");
-		printf("%s\n", res.body);
+		printf("Body: %s\n", res.body);
 	}
 
 	req.method = 127;
@@ -43,6 +43,10 @@ int main() {
 		printf("--- Route found! ---\n");
 		printf("Body: %s\n", res.body);
 	}
+
+	char* val = router_getQueryParam(req.path, "what");
+	printf("query value: %s\n", val);
+
 	router_destroy(router);
 
 	return 0;

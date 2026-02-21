@@ -64,6 +64,25 @@ int router_handleRoute(router_t* r,
 	return 404;
 }
 
+void* router_getQueryParam(const char* path, char* param) {
+	char* params = strdup(path);
+	char* tok = strtok(params, "&");
+	if (tok == NULL) {
+		return 0;
+	}
+
+	while(tok != NULL) {
+		if (strstr(tok, param) != NULL) {
+			char* val = strchr(tok, '=') + 1;
+			return val;
+		}
+
+		tok = strtok(0, "?");
+	}
+
+	return 0;
+}
+
 void router_printMethods() {
 	printf("--- METHODS ---\n");
 	printf("GET: %d\n", GET);
